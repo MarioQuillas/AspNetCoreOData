@@ -13,7 +13,7 @@ namespace ODataRoutingSample.Models
         public static IEdmModel GetEdmModel()
         {
             var builder = new ODataConventionModelBuilder();
-            builder.EntitySet<Product>("Products");
+            builder.EntitySet<Product>("Products").EntityType.HasKey(x=>x.TotoId);
             builder.EntitySet<Person>("People").EntityType.HasKey(c => new { c.FirstName, c.LastName });
 
             // function with optional parameters
@@ -44,6 +44,7 @@ namespace ODataRoutingSample.Models
             unboundFunction.Parameter<int>("minSalary");
             unboundFunction.Parameter<int>("maxSalary").Optional();
             unboundFunction.Parameter<string>("wholeName").HasDefaultValue("abc");
+
             return builder.GetEdmModel();
         }
 

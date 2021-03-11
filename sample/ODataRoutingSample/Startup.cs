@@ -55,9 +55,9 @@ namespace ODataRoutingSample
             */
 
             services.AddOData(opt => opt.Count().Filter().Expand().Select().OrderBy().SetMaxTop(5)
-                .AddModel(model0)
-                .AddModel("v1", model1)
-                .AddModel("v2{data}", model2, builder => builder.AddService<ODataBatchHandler, DefaultODataBatchHandler>(Microsoft.OData.ServiceLifetime.Singleton))
+                .AddModel("odata", model0)
+                //.AddModel("v1", model1)
+                //.AddModel("v2{data}", model2, builder => builder.AddService<ODataBatchHandler, DefaultODataBatchHandler>(Microsoft.OData.ServiceLifetime.Singleton))
                 //.ConfigureRoute(route => route.EnableQualifiedOperationCall = false) // use this to configure the built route template
                 );
 
@@ -76,7 +76,7 @@ namespace ODataRoutingSample
             //app.UseODataOpenApi();
 
             // Add the OData Batch middleware to support OData $Batch
-            app.UseODataBatching();
+            //app.UseODataBatching();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -87,16 +87,16 @@ namespace ODataRoutingSample
             app.UseRouting();
 
             // Test middelware
-            app.Use(next => context =>
-            {
-                var endpoint = context.GetEndpoint();
-                if (endpoint == null)
-                {
-                    return next(context);
-                }
+            //app.Use(next => context =>
+            //{
+            //    var endpoint = context.GetEndpoint();
+            //    if (endpoint == null)
+            //    {
+            //        return next(context);
+            //    }
 
-                return next(context);
-            });
+            //    return next(context);
+            //});
 
             //app.UseAuthorization();
 

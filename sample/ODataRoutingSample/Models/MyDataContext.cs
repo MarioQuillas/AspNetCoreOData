@@ -20,6 +20,8 @@ namespace ODataRoutingSample.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Product>().HasKey(x => x.TotoId);
+
             modelBuilder.Entity<Customer>().OwnsOne(c => c.HomeAddress).WithOwner();
             modelBuilder.Entity<Customer>().OwnsMany(c => c.FavoriteAddresses).WithOwner();
         }

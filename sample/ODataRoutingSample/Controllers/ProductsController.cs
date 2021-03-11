@@ -27,18 +27,21 @@ namespace ODataRoutingSample.Controllers
                 {
                     new Product
                     {
+                        TotoId="1",
                         Category = "Goods",
                         Color = Color.Red,
                         Detail = new ProductDetail { Id = "3", Info = "Zhang" },
                     },
                     new Product
                     {
+                        TotoId="2",
                         Category = "Magazine",
                         Color = Color.Blue,
                         Detail = new ProductDetail { Id = "4", Info = "Jinchan" },
                     },
                     new Product
                     {
+                        TotoId="3",
                         Category = "Fiction",
                         Color = Color.Green,
                         Detail = new ProductDetail { Id = "5", Info = "Hollewye" },
@@ -63,9 +66,9 @@ namespace ODataRoutingSample.Controllers
 
         [EnableQuery]
         [HttpGet]
-        public IActionResult Get(int key)
+        public IActionResult Get(string key)
         {
-            var product = _context.Products.FirstOrDefault(p => p.Id == key);
+            var product = _context.Products.FirstOrDefault(p => p.TotoId == key);
             if (product == null)
             {
                 return NotFound($"Not found product with id = {key}");
@@ -85,49 +88,49 @@ namespace ODataRoutingSample.Controllers
             return Created(product);
         }
 
-        [HttpPut]
-        public IActionResult Put(int key, [FromBody]Delta<Product> product)
-        {
-            var original = _context.Products.FirstOrDefault(p => p.Id == key);
-            if (original == null)
-            {
-                return NotFound($"Not found product with id = {key}");
-            }
+        //[HttpPut]
+        //public IActionResult Put(int key, [FromBody]Delta<Product> product)
+        //{
+        //    var original = _context.Products.FirstOrDefault(p => p.Id == key);
+        //    if (original == null)
+        //    {
+        //        return NotFound($"Not found product with id = {key}");
+        //    }
 
-            product.Put(original);
-            _context.SaveChanges();
-            return Updated(original);
-        }
+        //    product.Put(original);
+        //    _context.SaveChanges();
+        //    return Updated(original);
+        //}
 
-        [HttpPatch]
-        public IActionResult Patch(int key, Delta<Product> product)
-        {
-            var original = _context.Products.FirstOrDefault(p => p.Id == key);
-            if (original == null)
-            {
-                return NotFound($"Not found product with id = {key}");
-            }
+        //[HttpPatch]
+        //public IActionResult Patch(int key, Delta<Product> product)
+        //{
+        //    var original = _context.Products.FirstOrDefault(p => p.Id == key);
+        //    if (original == null)
+        //    {
+        //        return NotFound($"Not found product with id = {key}");
+        //    }
 
-            product.Patch(original);
+        //    product.Patch(original);
 
-            _context.SaveChanges();
+        //    _context.SaveChanges();
 
-            return Updated(original);
-        }
+        //    return Updated(original);
+        //}
 
-        [HttpDelete]
-        public IActionResult Delete(int key)
-        {
-            var original = _context.Products.FirstOrDefault(p => p.Id == key);
-            if (original == null)
-            {
-                return NotFound($"Not found product with id = {key}");
-            }
+        //[HttpDelete]
+        //public IActionResult Delete(int key)
+        //{
+        //    var original = _context.Products.FirstOrDefault(p => p.Id == key);
+        //    if (original == null)
+        //    {
+        //        return NotFound($"Not found product with id = {key}");
+        //    }
 
-            _context.Products.Remove(original);
-            _context.SaveChanges();
-            return Ok();
-        }
+        //    _context.Products.Remove(original);
+        //    _context.SaveChanges();
+        //    return Ok();
+        //}
 
         [HttpGet]
         // ~/....(minSalary=4, maxSalary=5, aveSalary=9)

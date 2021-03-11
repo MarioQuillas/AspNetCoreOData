@@ -17,7 +17,7 @@ namespace ODataRoutingSample.Controllers
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new Product
             {
-                Id = index,
+                TotoId = index.ToString(),
                 Category = "Category + " + index
             })
             .ToArray();
